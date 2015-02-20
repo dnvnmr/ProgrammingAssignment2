@@ -55,7 +55,7 @@ cacheSolve <- function(x, ...) {
   
   ## If m has a value, return the value, which is the inverse of the initial matrix
   if(!is.null(m)) {
-    message("getting cached data")
+    message("Retrieving cached data.")
     
     ## Return the value of the solution, and exit the function
     return(m)
