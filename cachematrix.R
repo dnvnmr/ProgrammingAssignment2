@@ -19,26 +19,26 @@ makeCacheMatrix <- function(x = matrix()) {
   
   ## This function will reset the value of the initial matrix, and 
   ## reset m to NULL to indicate that the inverse needs to be recalculated
-    set <- function(y) {
+    setMatrix <- function(y) {
     
     x <<- y
     
     ## Reset solution variable to NULL to indicate  matrix needs to 
     ## be resolved
-        m <<- NULL
+    m <<- NULL
   }
   
   ## Retrieve value of initial matrix
-  get <- function() x
+  getMatrix <- function() x
   
   ## Solve the matrix and store the inverse
-  setsolve <- function(solve) m <<- solve
+  setSolution <- function(solve) m <<- solve
   
   ## Retrive the inverse of the matrix
-  getsolve <- function() m
+  getSolution <- function() m
   
   ## Return the list of functions stored in this vector
-  list(set = set, get = get, setsolve = setsolve, getsolve = getsolve)
+  list(setMatrix = setMatrix, getMatrix = getMatrix, setSolution = setSolution, getSolution = getSolution)
   
 }
 
@@ -51,7 +51,7 @@ cacheSolve <- function(x, ...) {
   
   ## Retrive the inverse of the matrix - if one exists, m will have a value. If
   ## not, m will return NULL
-  m <- x$getsolve()
+  m <- x$getSolution()
   
   ## If m has a value, return the value, which is the inverse of the initial matrix
   if(!is.null(m)) {
@@ -64,9 +64,9 @@ cacheSolve <- function(x, ...) {
   ## If a solution is not stored, we need to calculate and store one.
   
   ## Calculate the inverse
-  m <- solve(x$get(), ...)
+  m <- solve(x$getMatrix(), ...)
   
   ## Cache the inverse
-  x$setsolve(m)
+  x$setSolution(m)
 }
 
